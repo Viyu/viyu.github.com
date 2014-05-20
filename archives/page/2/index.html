@@ -1,0 +1,589 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 2 | Archives | Mosthink</title>
+  <meta name="author" content="Viyu">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Mosthink"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Mosthink" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Mosthink</a></h1>
+  <h2><a href="/">Viyu&#39;s Blog</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">Archives</h2>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2010-02-05T00:00:00.000Z"><a href="/2010/02/05/2010-02-05-sort/">Feb 5 2010</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2010/02/05/2010-02-05-sort/">排序</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><b>【选择排序】</b></p>
+<p>a[i++] —&gt; a[n]，从前往后看、选择最小值、一次交换到位</p>
+<p>1，完整循环找到数组中最小的元素；</p>
+<p>2，把这个最小的元素与a[0]交换；</p>
+<p>3，在a[i]-a<a href="i = 1, 2, ... n">n</a>的子数组中重复1-2步骤；</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) {
+
+    <span class="keyword">int</span> <span class="built_in">min</span> = i;
+
+    <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) {
+
+        <span class="keyword">if</span>(a[j] &lt; <span class="built_in">min</span>) 
+
+            <span class="built_in">min</span> = j;
+
+    }
+
+    swap(i, j, a);
+}
+</pre></td></tr></table></figure>
+
+<p>简写：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; n; i++) {
+    <span class="built_in">min</span> = <span class="comment">//本次循环的i...n中的最小的元素的index；</span>
+
+    <span class="comment">//将min和本次循环的i两个元素交换；</span>
+}
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2010/02/05/2010-02-05-sort/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2010-01-05T00:00:00.000Z"><a href="/2010/01/05/2010-01-05-javavm/">Jan 5 2010</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2010/01/05/2010-01-05-javavm/">Java VM学习笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>局部变量表（虚拟机栈中的一部分）在编译期完成分配，运行期不会再改变大小；</p>
+<p>每个方法对应一个栈帧（存储局部变量表、操作数栈、动态链接、方法出口等），栈帧被存储到虚拟机栈中，每个线程对应一个虚拟机栈，方法结束，栈帧生命周期结束，线程结束，虚拟机栈生命周期结束；</p>
+<p>如果线程请求的虚拟机栈深度大于虚拟机所允许的深度，throw StackOverflowerror；</p>
+<p>如果动态扩展时请求不到足够内存，throw OutOfMemoryError；</p>
+<p>所有的对象实例以及数组都要在堆上分配（不绝对），堆是所有线程共享的，在虚拟机启动时创建，堆是垃圾回收的主要区域，GC堆；</p>
+<p>Java虚拟机栈、本地方法栈、堆都等，除了程序计数器，其他内存区都会throw OutOfMemoryError；</p>
+<p>堆物理上可以不连续，逻辑上是连续的；</p>
+<p>方法区也是各个线程共享的，其中包括运行时常量池，类的描述以及常量都存放在这个池里；</p>
+<p>直接内存常用于I/O库的操作；直接内存操作能提高性能，因为避免了Java堆和Native堆的数据复制；</p>
+<hr>
+<p>指针方式<br>句柄方式可以带来更大的伸缩性，对象被移动时reference的值不必被修改；</p>
+<p>指针方式可以带来更高的访问性能，因为它节省了一次指针定位；</p>
+<p>虚拟机用哪种方式是虚拟机自己实现的；</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2010/01/05/2010-01-05-javavm/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2009-10-20T00:00:00.000Z"><a href="/2009/10/20/2009-10-20-string/">Oct 20 2009</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2009/10/20/2009-10-20-string/">String</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>【String】就是对char[]数组进行封装的对象，由三部分组成：</p>
+<p>1， char数组：它是String对象所表示的字符串的超集；</p>
+<p>2, 3， offset和count，表示了String对象表示的字符串在char数组中的起始段；</p>
+<p>String是特定设计的，包含以下三个特点：</p>
+<p>1， 不变性： 不变模式immutable，节省了同步和锁等待的消耗；</p>
+<p>2， 针对【常量池】的优化：</p>
+<p>变量                                                            内存空间                           常量池</p>
+<p>String str1 = “abc”   ———————&gt;</p>
+<p>String str2 = “abc”   ———————&gt;                                                   abc</p>
+<p>String str3 = new String(“abc”)  —-&gt;      str实例         ———&gt;</p>
+<p>注意：str1 == str3.intern()是true；str2, str2直接指向常量池中的”abc”，不拷贝；</p>
+<p>3，类的final定义;</p>
+<p>String的两个构造方法：</p>
+<pre><code><span class="keyword">public</span> <span class="title">String</span>(<span class="keyword">char</span> <span class="keyword">value</span>[]) {
+
+    <span class="keyword">this</span>.<span class="keyword">value</span> = Arrays.copyOf(<span class="keyword">value</span>, <span class="keyword">value</span>.length);
+
+}
+
+String(<span class="keyword">char</span>[] <span class="keyword">value</span>, boolean share) {
+
+    <span class="keyword">this</span>.<span class="keyword">value</span> = <span class="keyword">value</span>;
+
+}
+</code></pre><p>第一个构造方法会构造全新的char[]数组；</p>
+<p>第二个构造方法共享了原来的char[]数组；</p>
+<p>【内存泄漏】第二个包可见的共享char[]数组的构造方法会导致内存泄露</p>
+<p>这个构造方法是空间换时间的策略（很有可能理解为时间换空间，因为share了空间，但这里大多数情况下是阻止大空间的GC）；</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2009/10/20/2009-10-20-string/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2009-08-17T16:00:00.000Z"><a href="/2009/08/18/2009-08-18-set/">Aug 18 2009</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2009/08/18/2009-08-18-set/">集合</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>【ArrayList LinkedList Vector】</p>
+<p>Vector对于ArrayList，因为同步而引起的性能差别并不明显；</p>
+<p>LinkedList是循环双向链表，无论是否为空，总包含一个header表项：</p>
+<p>|——————————————————————&gt;</p>
+<p>header ——&gt; ele1 ——-&gt; ele2 ——&gt;  ele3</p>
+<pre><code>          &lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>       &lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>         &lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>        
+</code></pre><p>&lt;—————————————————————-|</p>
+<p>增加元素到表尾，ArrayList 优于 LinkedList：</p>
+<p>ArrayList的扩容最终调用System.arraycopy()方法；</p>
+<p>数组是连续的，ArrayList只有在扩容时才会低效一些；</p>
+<p>而链表，虽然无须扩容，但新建对象和大量赋值操作会低效；</p>
+<p>插入元素到任意位置，LinkedList优于ArrayList：</p>
+<p>因为Array的连续性，每次插入操作都需要是数组重排；</p>
+<p>LinkedList在任意位置插入和尾部插入是一样的；</p>
+<p>删除任意位置元素，ArrayList尾部删除、LinkedList在头部删除和尾部删除这三个都是高效的，其他的都是低效的：</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2009/08/18/2009-08-18-set/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2009-07-02T00:00:00.000Z"><a href="/2009/07/02/2009-07-02-sfsjjg/">Jul 2 2009</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2009/07/02/2009-07-02-sfsjjg/">算法和数据结构</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><b>几个对数组的算法</b></p>
+<p>1， 找出数组中的最大值：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">double</span> <span class="built_in">max</span> = a[<span class="number">0</span>];
+
+<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.<span class="built_in">length</span>; i++)
+
+    <span class="keyword">if</span>(a[i] &gt; <span class="built_in">max</span>) <span class="built_in">max</span> = a[i];
+</pre></td></tr></table></figure>
+
+<p>//把最大值马上设定为数组的第一个元素，然后遍历数组，如果有别当前这个最大值更大的元素，则把最大值更新，直到遍历结束；</p>
+<p>2， 计算数组的平均值：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="keyword">double</span> <span class="keyword">sum</span> = <span class="number">0.0</span>;
+
+<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length; i++)
+
+    <span class="keyword">sum</span> += a[i];
+
+<span class="keyword">double</span> average = <span class="keyword">sum</span> / a.length;
+</pre></td></tr></table></figure>
+
+<p>//算出总值，然后除以数组的元素数；</p>
+<p>3，复制数组：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="keyword">double</span>[] b = new <span class="keyword">double</span>[a.<span class="built_in">length</span>];
+
+<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.<span class="built_in">length</span>; i++) 
+
+    b[i] = a[i];
+
+<span class="comment">//new 一个和原数组同length同类型的数组，然后遍历赋值每个元素；</span>
+</pre></td></tr></table></figure>
+
+<p>4，颠倒数组元素的顺序：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="keyword">double</span> [] b = new <span class="keyword">double</span>[a.<span class="built_in">length</span>];
+
+<span class="keyword">for</span>(<span class="keyword">int</span> i = a.<span class="built_in">length</span> - <span class="number">1</span>, j = <span class="number">0</span>; i &gt; -<span class="number">1</span> &amp;&amp; j &lt; b.<span class="built_in">length</span> ; i--, j++) 
+
+    b[j] = a[i];
+
+<span class="comment">//这是个直观低效率算法，时间消耗(a.length)，空间消耗(2 * a.length)，并且有两个循环指数i, j；</span>
+
+<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; a.<span class="built_in">length</span> / <span class="number">2</span>; i++) {
+
+    <span class="keyword">double</span> temp = a[i];
+
+    a[i] = a[a.<span class="built_in">length</span> - <span class="number">1</span> - i];
+
+    a[a.<span class="built_in">length</span> - <span class="number">1</span> - i] = temp;
+}
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2009/07/02/2009-07-02-sfsjjg/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/archives/" class="alignleft prev">Prev</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:mosthink.net">
+  </form>
+</div>
+
+  
+
+  <div class="widget tag">
+  <h3 class="title">My Projects</h3>
+  <ul class="entry">
+ 	<li><a href="http://mosthink.net/LockPattern" target="_blank">LockPattern</a></li>
+    <li><a href="http://mosthink.net/ANotepad" target="_blank">ANotepad</a></li>
+    <li><a href="http://mosthink.net/PushNewsmth2Mail" target="_blank">PushNewsmth2Mail</a></li>
+    <li><a href="http://mosthink.net/DoubleFacedCamera" target="_blank">DoubleFacedCamera</a></li>
+    <li><a href="http://mosthink.net/TransformersPuzzle" target="_blank">TransformersPuzzle</a></li>
+    <li><a href="http://mosthink.net/BluetoothChat" target="_blank">BluetoothChat</a></li>
+    <li><a href="http://mosthink.net/LianLianKan" target="_blank">LianLianKan</a></li>
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">My Codes(gist)</h3>
+  <ul class="entry">
+    <li><a href="https://gist.github.com/Viyu/8093281" target="_blank">DragAndDropDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/8093389" target="_blank">LedLightDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/d0df67fb40be217638a3" target="_blank">PingUtil</a></li>
+    <li><a href="https://gist.github.com/Viyu/9406327" target="_blank">GPS utility</a></li>
+    <li><a href="https://gist.github.com/Viyu/9521561" target="_blank">PopupWindow</a></li>
+  </ul> 
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    <li><a href="http://haoffer.com" target="_blank">Haoffer.com</a></li>
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>2</small></li>
+  
+    <li><a href="/tags/Android/">Android</a><small>8</small></li>
+  
+    <li><a href="/tags/Android Dex/">Android Dex</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ListView/">Android ListView</a><small>1</small></li>
+  
+    <li><a href="/tags/Android LockPattern/">Android LockPattern</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ping/">Android ping</a><small>1</small></li>
+  
+    <li><a href="/tags/Annotation/">Annotation</a><small>1</small></li>
+  
+    <li><a href="/tags/Class/">Class</a><small>1</small></li>
+  
+    <li><a href="/tags/Concurrence/">Concurrence</a><small>1</small></li>
+  
+    <li><a href="/tags/Design/">Design</a><small>1</small></li>
+  
+    <li><a href="/tags/GPS/">GPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>3</small></li>
+  
+    <li><a href="/tags/Jvm/">Jvm</a><small>1</small></li>
+  
+    <li><a href="/tags/PopupWindow/">PopupWindow</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Viyu
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Archives: 2013 | Mosthink</title>
+  <meta name="author" content="Viyu">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Mosthink"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Mosthink" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Mosthink</a></h1>
+  <h2><a href="/">Viyu&#39;s Blog</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">2013</h2>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-23T00:00:00.000Z"><a href="/2013/12/23/2013-12-23-draganddrop/">Dec 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/23/2013-12-23-draganddrop/">Android客户端的图形化拖放操作的设计实现</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><b>为什么要拖放？</b><br>拖放在某些UI交互中可以简化用户操作。</p>
+<p><b>拖放的步骤包括哪些？</b><br>“Drag and Drop”，拖放，顾名思义，总共就分三步：<br>1，    开始拖起来；<br>2，    正在拖；<br>3，    放下，进行操作；<br>在这三步里，贯穿的是数据的传输，从拖的地方传输到放的地方。</p>
+<p>现在，我们就以一个简单的拖放删除笔记的App来讲解上面三个步骤都怎么实现的。<br>App见截图，拽住上面的笔记，然后拖至底下的垃圾桶然后放开，笔记就被删除了。</p>
+<p><img src="http://a.hiphotos.bdimg.com/album/s%3D550%3Bq%3D90%3Bc%3Dxiangce%2C100%2C100/sign=4b2bee88b54543a9f11bfac92e2cfbbf/eac4b74543a9822637ce1b5b8882b9014a90ebbb.jpg?referer=83c60f9d60d9f2d3790611df5559&x=.jpg"/></p>
+<p><b>1，开始拖拽：</b><br>开始拖拽要解决三个问题：<br>1， 什么时候开始？如何开始？<br>一般是在用户长按一个组件的时候，我们开始拖拽，所以给要被拖拽的View定义它的OnLongClickListener，在其中调用View.startDrag()方法就可以了。<br>startDrag()方法的定义：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>boolean android<span class="preprocessor">.view</span><span class="preprocessor">.View</span><span class="preprocessor">.startDrag</span>(
+		ClipData data, DragShadowBuilder shadowBuilder, Object myLocalState, int flags)
+</pre></td></tr></table></figure>
+
+<p>第一个参数ClipData data是拖拽的对象，下面第2条来讲解；第二个参数DragShadowBuilder shadowBuilder是拖拽时的样子，下面的第3条来讲解。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/12/23/2013-12-23-draganddrop/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-15T00:00:00.000Z"><a href="/2013/12/15/2013-12-15-lednoti/">Dec 15 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/15/2013-12-15-lednoti/">LED notification in Android device</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Code can control the LED notification in Android device, using android.app.Notification:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>notification = new Notification()<span class="comment">;  </span>
+notification<span class="preprocessor">.flags</span> = Notification<span class="preprocessor">.FLAG</span>_SHOW_LIGHTS<span class="comment">;  </span>
+  
+notification<span class="preprocessor">.ledARGB</span> = ledColor<span class="comment">;  </span>
+notification<span class="preprocessor">.ledOffMS</span> = <span class="number">200</span><span class="comment">;  </span>
+notification<span class="preprocessor">.ledOnMS</span> = <span class="number">500</span><span class="comment">;  </span>
+  
+notificationManager<span class="preprocessor">.notify</span>(<span class="number">0</span>, notification)<span class="comment">;  </span>
+</pre></td></tr></table></figure>
+
+<p>ledARGB: The color of the led. The hardware will do its best approximation.</p>
+<p>ledOffMS: The number of milliseconds for the LED to be off while it’s flashing. The hardware will do its best approximation.</p>
+<p>ledOnMS: The number of milliseconds for the LED to be on while it’s flashing. The hardware will do its best approximation.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/12/15/2013-12-15-lednoti/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-10T00:00:00.000Z"><a href="/2013/12/10/2013-12-10-tiletextureimage/">Dec 10 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/10/2013-12-10-tiletextureimage/">How to tile small texture image onto page as its background</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>You don’t need to set a big size image as the background of pages if the image is texture or uniform color.</p>
+<p>How to tile small texture image onto big page/area as its background?</p>
+<p>First, define drawable xml in res/drawable,</p>
+<p>bg_texture_image.xml:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="pi">&lt;?xml version=”1.0″ encoding=”utf-8″?&gt;</span>  
+<span class="tag">&lt;<span class="title">bitmap</span> <span class="attribute">xmlns:android</span>=<span class="value">”http:</span>//<span class="attribute">schemas.android.com</span>/<span class="attribute">apk</span>/<span class="attribute">res</span>/<span class="attribute">android</span>”  
+      <span class="attribute">android:src</span>=<span class="value">”@drawable</span>/<span class="attribute">bg_image</span>”  
+      <span class="attribute">android:tileMode</span>=<span class="value">”repeat”</span> /&gt;</span>  
+</pre></td></tr></table></figure>
+
+<p>Second, use it as the background,</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">android:background</span>=<span class="string">”@drawable/bg_texture_image”  </span>
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-25T00:00:00.000Z"><a href="/2013/11/25/2013-11-25-TextViewwithanim/">Nov 25 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/11/25/2013-11-25-TextViewwithanim/">Implement a TextView with an animation in its left side</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>In my case, I want to write a TextView with an animation in its left side.</p>
+<p>ImageView + TextView could work but it’s not frugal enough.</p>
+<p>TextView with drawableLeft would be the best option.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">TextView</span>  
+     … …  
+     <span class="attribute">android:drawablePadding</span>=<span class="value">”10dip”</span>  
+     <span class="attribute">android:drawableLeft</span>=<span class="value">”@drawable</span>/<span class="attribute">loadingicon</span>” /&gt;</span>  
+</pre></td></tr></table></figure>
+
+<p>But above implementation just show a icon in the left of TextView, not an animation.</p>
+<p>How to show an animation instead of a icon?</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/11/25/2013-11-25-TextViewwithanim/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-20T00:00:00.000Z"><a href="/2013/11/20/2013-11-20-The Adapter of ListView/">Nov 20 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/11/20/2013-11-20-The Adapter of ListView/">The Adapter of ListView: Just adapt data to view, don’t do anything else</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>The design of SimpleAdapter is not good in my opinion.</p>
+<p>An adapter should just adapter the data to view, not care to inflate xml to create Layout View, hold the member Views of the layout view, and, fill the datas to each member View one by one. SimpleAdapter does these things all together. It is high coupling design.</p>
+<p>The solution is a ItemViewHolder class, which inflate and hold the layout view and its member views, and parse datas to fill them  to member views one by one. And the most cool is, it’s layout view of ItemViewHolder set “this” as its tag. So that you can get the ItemViewHolder instance of the convertView in getView(…, View convertView, …) function.</p>
+<p>See below code snippets.</p>
+<p>In Adapter, passed in a List as data list.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="built_in">List</span><span class="subst">&lt;</span><span class="built_in">Data</span><span class="subst">&gt;</span> dataList;  
+</pre></td></tr></table></figure>
+
+<p>and override getView() like this:</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/11/20/2013-11-20-The Adapter of ListView/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-16T00:00:00.000Z"><a href="/2013/11/16/2013-11-16-shape plus selector/">Nov 16 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/11/16/2013-11-16-shape plus selector/">Shape + Selector: Make a Shape as one item of the Selector</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Generally, I use a selector to select pictures or colors to render the normal and the pressed background for View. </p>
+<p>And use a Shape to draw a fixed background with border, round, gradient and other UI effect for View.</p>
+<p>What if you wanna use them both for one View?</p>
+<p>Make a Shape as one item of the Selector.</p>
+<p>Selector selects background from Shape list.</p>
+<p>Below is a sample.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/11/16/2013-11-16-shape plus selector/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-18T00:00:00.000Z"><a href="/2013/10/18/2013-10-18-units issue/">Oct 18 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/18/2013-10-18-units issue/">Units Problem: How to read text size as custom attr from xml and set it to TextView in java code</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Here is this topic’s background:</p>
+<p>I defined a custom View which extends FrameLayout and contains a TextView, calledMyView here. And I defined custom attribute “myviewtextsize” in attrs.xml for MyView so that clients can set different text size in layout xml for the TextView of MyView.</p>
+<p>So far, clients code can set text size like this:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">MyView</span>  
+     <span class="attribute">android:</span>…  
+     …
+     <span class="attribute">my:myviewtextsize</span>=<span class="value">”@dimen</span>/<span class="attribute">textsize_24</span>″  
+     …  
+/&gt;</span> 
+</pre></td></tr></table></figure>
+
+<p>The problem is: how to read the client’s text size number and set it to the TextVew of MyView?</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/10/18/2013-10-18-units issue/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:mosthink.net">
+  </form>
+</div>
+
+  
+
+  <div class="widget tag">
+  <h3 class="title">My Projects</h3>
+  <ul class="entry">
+ 	<li><a href="http://mosthink.net/LockPattern" target="_blank">LockPattern</a></li>
+    <li><a href="http://mosthink.net/ANotepad" target="_blank">ANotepad</a></li>
+    <li><a href="http://mosthink.net/PushNewsmth2Mail" target="_blank">PushNewsmth2Mail</a></li>
+    <li><a href="http://mosthink.net/DoubleFacedCamera" target="_blank">DoubleFacedCamera</a></li>
+    <li><a href="http://mosthink.net/TransformersPuzzle" target="_blank">TransformersPuzzle</a></li>
+    <li><a href="http://mosthink.net/BluetoothChat" target="_blank">BluetoothChat</a></li>
+    <li><a href="http://mosthink.net/LianLianKan" target="_blank">LianLianKan</a></li>
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">My Codes(gist)</h3>
+  <ul class="entry">
+    <li><a href="https://gist.github.com/Viyu/8093281" target="_blank">DragAndDropDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/8093389" target="_blank">LedLightDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/d0df67fb40be217638a3" target="_blank">PingUtil</a></li>
+    <li><a href="https://gist.github.com/Viyu/9406327" target="_blank">GPS utility</a></li>
+    <li><a href="https://gist.github.com/Viyu/9521561" target="_blank">PopupWindow</a></li>
+  </ul> 
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    <li><a href="http://haoffer.com" target="_blank">Haoffer.com</a></li>
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>2</small></li>
+  
+    <li><a href="/tags/Android/">Android</a><small>8</small></li>
+  
+    <li><a href="/tags/Android Dex/">Android Dex</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ListView/">Android ListView</a><small>1</small></li>
+  
+    <li><a href="/tags/Android LockPattern/">Android LockPattern</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ping/">Android ping</a><small>1</small></li>
+  
+    <li><a href="/tags/Annotation/">Annotation</a><small>1</small></li>
+  
+    <li><a href="/tags/Class/">Class</a><small>1</small></li>
+  
+    <li><a href="/tags/Concurrence/">Concurrence</a><small>1</small></li>
+  
+    <li><a href="/tags/Design/">Design</a><small>1</small></li>
+  
+    <li><a href="/tags/GPS/">GPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>3</small></li>
+  
+    <li><a href="/tags/Jvm/">Jvm</a><small>1</small></li>
+  
+    <li><a href="/tags/PopupWindow/">PopupWindow</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Viyu
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

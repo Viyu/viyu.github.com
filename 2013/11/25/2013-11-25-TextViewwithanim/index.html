@@ -1,0 +1,334 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Implement a TextView with an animation in its left side | Mosthink</title>
+  <meta name="author" content="Viyu">
+  
+  <meta name="description" content="In my case, I want to write a TextView with an animation in its left side.
+ImageView + TextView could work but it’s not frugal enough.
+TextView with drawableLeft would be the best option.
+1
+2
+3
+4
+&amp;lt;TextView  
+     … …  
+     android:drawablePadding=”10dip”  
+     android:drawableLeft=”@drawable/loadingicon” /&amp;gt;  
+
+
+But above implementation just show a icon in the left of TextView, not an animation.
+How to show an animation instead of a icon?">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Implement a TextView with an animation in its left side"/>
+  <meta property="og:site_name" content="Mosthink"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Mosthink" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Mosthink</a></h1>
+  <h2><a href="/">Viyu&#39;s Blog</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-25T00:00:00.000Z"><a href="/2013/11/25/2013-11-25-TextViewwithanim/">Nov 25 2013</a></time>
+      
+      
+  
+    <h1 class="title">Implement a TextView with an animation in its left side</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>In my case, I want to write a TextView with an animation in its left side.</p>
+<p>ImageView + TextView could work but it’s not frugal enough.</p>
+<p>TextView with drawableLeft would be the best option.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">TextView</span>  
+     … …  
+     <span class="attribute">android:drawablePadding</span>=<span class="value">”10dip”</span>  
+     <span class="attribute">android:drawableLeft</span>=<span class="value">”@drawable</span>/<span class="attribute">loadingicon</span>” /&gt;</span>  
+</pre></td></tr></table></figure>
+
+<p>But above implementation just show a icon in the left of TextView, not an animation.</p>
+<p>How to show an animation instead of a icon?</p>
+<a id="more"></a>
+
+<p>Assume you have 4 pictures which would be an animation if display them one after one. Then define animation xml in res/anim folder in your project.</p>
+<p>loading_animation.xml:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">animation-list</span> <span class="attribute">xmlns:android</span>=<span class="value">”http:</span>//<span class="attribute">schemas.android.com</span>/<span class="attribute">apk</span>/<span class="attribute">res</span>/<span class="attribute">android</span>”  
+      <span class="attribute">android:oneshot</span>=<span class="value">”false”</span> &gt;</span>  
+      <span class="tag">&lt;<span class="title">item</span>  
+           <span class="attribute">android:drawable</span>=<span class="value">”@drawable</span>/<span class="attribute">loading_1</span>″  
+           <span class="attribute">android:duration</span>=<span class="value">”500″</span>&gt;</span>  
+       <span class="tag">&lt;/<span class="title">item</span>&gt;</span>  
+       <span class="tag">&lt;<span class="title">item</span>  
+            <span class="attribute">android:drawable</span>=<span class="value">”@drawable</span>/<span class="attribute">loading_2</span>″  
+            <span class="attribute">android:duration</span>=<span class="value">”500″</span>&gt;</span>  
+        <span class="tag">&lt;/<span class="title">item</span>&gt;</span>  
+        <span class="tag">&lt;<span class="title">item</span>  
+             <span class="attribute">android:drawable</span>=<span class="value">”@drawable</span>/<span class="attribute">loading_3</span>″  
+             <span class="attribute">android:duration</span>=<span class="value">”500″</span>&gt;</span>  
+        <span class="tag">&lt;/<span class="title">item</span>&gt;</span>  
+<span class="tag">&lt;/<span class="title">animation-list</span>&gt;</span>  
+</pre></td></tr></table></figure>
+
+<p>“android:oneshot” determines whether or not play the animation just once.<br>“android:duration” determines the duration of pictures switching.</p>
+<p>Then in layout xml, use above animation like this:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">TextView</span>  
+      … …  
+      <span class="attribute">android:drawablePadding</span>=<span class="value">”10dip”</span>  
+      <span class="attribute">android:drawableLeft</span>=<span class="value">”@anim</span>/<span class="attribute">loading_animation</span>” /&gt;</span>  
+</pre></td></tr></table></figure>
+
+<p>Bingo? no, no, no, the animation can not switching yet.</p>
+<p>You need to do more.</p>
+<p>In java/Activity code, you must get the animation drawable and start it.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>Drawable[] draws = locateAreaTextView.getCompoundDrawables();  
+<span class="keyword">if</span> (draws != <span class="literal">null</span> &amp;&amp; draws.length &gt; <span class="number">0</span> &amp;&amp; draws[<span class="number">0</span>] <span class="keyword">instanceof</span> AnimationDrawable) {  
+       loadingAnimation = (AnimationDrawable) draws[<span class="number">0</span>];  
+       loadingAnimation.start();  
+}  
+</pre></td></tr></table></figure>
+
+<p>In above, we get index 0 of the drawable array since drawableLeft is in 0 position of the array.</p>
+<p>Now, the animation works. But there is one more trap.</p>
+<p>If you put above codes in onCreate() of Activity, draws will be a [null, null, null, null] array.</p>
+<p>You must put it in onResumse() of Activity.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/Android/">Android</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://mosthink.net/2013/11/25/2013-11-25-TextViewwithanim/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:mosthink.net">
+  </form>
+</div>
+
+  
+
+  <div class="widget tag">
+  <h3 class="title">My Projects</h3>
+  <ul class="entry">
+ 	<li><a href="http://mosthink.net/LockPattern" target="_blank">LockPattern</a></li>
+    <li><a href="http://mosthink.net/ANotepad" target="_blank">ANotepad</a></li>
+    <li><a href="http://mosthink.net/PushNewsmth2Mail" target="_blank">PushNewsmth2Mail</a></li>
+    <li><a href="http://mosthink.net/DoubleFacedCamera" target="_blank">DoubleFacedCamera</a></li>
+    <li><a href="http://mosthink.net/TransformersPuzzle" target="_blank">TransformersPuzzle</a></li>
+    <li><a href="http://mosthink.net/BluetoothChat" target="_blank">BluetoothChat</a></li>
+    <li><a href="http://mosthink.net/LianLianKan" target="_blank">LianLianKan</a></li>
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">My Codes(gist)</h3>
+  <ul class="entry">
+    <li><a href="https://gist.github.com/Viyu/8093281" target="_blank">DragAndDropDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/8093389" target="_blank">LedLightDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/d0df67fb40be217638a3" target="_blank">PingUtil</a></li>
+    <li><a href="https://gist.github.com/Viyu/9406327" target="_blank">GPS utility</a></li>
+    <li><a href="https://gist.github.com/Viyu/9521561" target="_blank">PopupWindow</a></li>
+  </ul> 
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    <li><a href="http://haoffer.com" target="_blank">Haoffer.com</a></li>
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>2</small></li>
+  
+    <li><a href="/tags/Android/">Android</a><small>8</small></li>
+  
+    <li><a href="/tags/Android Dex/">Android Dex</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ListView/">Android ListView</a><small>1</small></li>
+  
+    <li><a href="/tags/Android LockPattern/">Android LockPattern</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ping/">Android ping</a><small>1</small></li>
+  
+    <li><a href="/tags/Annotation/">Annotation</a><small>1</small></li>
+  
+    <li><a href="/tags/Class/">Class</a><small>1</small></li>
+  
+    <li><a href="/tags/Concurrence/">Concurrence</a><small>1</small></li>
+  
+    <li><a href="/tags/Design/">Design</a><small>1</small></li>
+  
+    <li><a href="/tags/GPS/">GPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>3</small></li>
+  
+    <li><a href="/tags/Jvm/">Jvm</a><small>1</small></li>
+  
+    <li><a href="/tags/PopupWindow/">PopupWindow</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Viyu
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

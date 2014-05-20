@@ -1,0 +1,1568 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Archives | Mosthink</title>
+  <meta name="author" content="Viyu">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Mosthink"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Mosthink" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Mosthink</a></h1>
+  <h2><a href="/">Viyu&#39;s Blog</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">Archives</h2>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-05-20T00:00:00.000Z"><a href="/2014/05/20/2014-05-20-lockpattern/">May 20 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/20/2014-05-20-lockpattern/">Android图案锁实现</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://g.hiphotos.bdimg.com/album/s%3D550%3Bq%3D90%3Bc%3Dxiangce%2C100%2C100/sign=94f295ef13dfa9ecf92e561252eb863e/562c11dfa9ec8a130506a013f503918fa0ecc021.jpg?referer=bfd815e96259252dfa00293420ff&x=.jpg"/></p>
+<p>很多安全要求高的App都会有个图案/手势/LockPattern解锁的模块，比如支付宝钱包等。</p>
+<p>Android系统本身就有这个东西，叫LockPatternView，所以在自己的App中不用自己实现，但也不能直接调用，因为Android的LockPatternView不是给App用的，<br>得从\AndroidSdk\sources\android-19\com\android\internal\widget下拷贝出来改改再用。<br>具体步骤：<br>1， 拷贝两个文件LockPatternView和LockPatternUtils；<br>2， LockPatternView.java中报错的地方，都是找不到string/drawable/attr等，按照名字去sdk相应目录下拷出这些资源来或者新建；<br>3， 删掉LockPatternUtils.java中所有代码，除了LockPatternView中要调用的两个方法stringToPattern和patternToString；</p>
+<p>现在这个LockPatternView就可以用了，在自己的布局中使用这个View，并且给其setOnPatternListener(…).<br>OnPatternListener有个方法: </p>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPatternDetected</span>(List&lt;Cell&gt; pattern);
+</pre></td></tr></table></figure><br>pattern就是九宫格绘制出来的点的一个list.</p>
+<p>要真正实现一个设置图案锁\解锁的模块，还有一些工作要自己做，利用上面的LockPatternView生成的结果，去两次匹配、存储、解锁时再匹配等。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/05/20/2014-05-20-lockpattern/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-12T00:00:00.000Z"><a href="/2014/03/12/2014-03-13-popupwindow/">Mar 12 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/12/2014-03-13-popupwindow/">使用PopupWindow</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>PopupWindow可以用来实现弹出任意位置的菜单，比Context Menu和Option Menu灵活性更高。<br> Android中弹出一个PopupWindow基本有两个方法：</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="comment">//Display the content view in a popup window anchored to the bottom-left corner of the anchor view.</span>
+<span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showAsDropDown</span>(View anchor, <span class="keyword">int</span> xoff, <span class="keyword">int</span> yoff);
+</pre></td></tr></table></figure><br>这个方法是弹出的窗口在anchor view的bottom-left,一般Android应用的菜单都在右上，实现思路就是以app中右上的view作为anchor，然后用屏幕宽度减去popup window的宽度作为xoff.<br><br> 还有一个方法：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showAtLocation</span>(IBinder token, <span class="keyword">int</span> gravity, <span class="keyword">int</span> x, <span class="keyword">int</span> y);
+</pre></td></tr></table></figure>
+
+<p>再来说如何实现一个PopupWindow，步骤基本如下，下面代码时extends了PopupWindow的子类的实现：</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/12/2014-03-13-popupwindow/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-06T00:00:00.000Z"><a href="/2014/03/06/2014-03-06-dexdongtai/">Mar 6 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/06/2014-03-06-dexdongtai/">Dex动态加载</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><b>Dex动态加载是为了解决什么问题？ </b></p>
+<p>在Android系统中，一个App的所有代码都在一个Dex文件里面。</p>
+<p>Dex是一个类似Jar的存储了多个Java编译字节码的归档文件。</p>
+<p>因为Android系统使用Dalvik虚拟机，所以需要把使用Java Compiler编译之后的class文件转换成Dalvik能够执行的class文件。这里需要强调的是，Dex和Jar一样是一个归档文件，里面仍然是Java代码对应的字节码文件。</p>
+<p>当Android系统启动一个应用的时候，有一步是对Dex进行优化，这个过程有一个专门的工具来处理，叫DexOpt。DexOpt的执行过程是在第一次加载Dex文件的时候执行的。</p>
+<p>这个过程会生成一个ODEX文件，即Optimised Dex。执行ODex的效率会比直接执行Dex文件的效率要高很多。</p>
+<p>但是在早期的Android系统中，DexOpt有一个问题，也就是这篇文章想要说明并解决的问题。</p>
+<p>DexOpt会把每一个类的方法id检索起来，存在一个链表结构里面。但是这个链表的长度是用一个short类型来保存的，导致了方法id的数目不能够超过65536个。</p>
+<p>当一个项目足够大的时候，显然这个方法数的上限是不够的。尽管在新版本的Android系统中，DexOpt修复了这个问题，但是我们仍然需要对老系统做兼容。</p>
+<p><b>Dex动态加载思路</b></p>
+<p>一种有效的解决思路是把Dex文件分割成多个较小的Dex。这就如同很多项目会把自己分割成多个Jar文件一样，不同的功能在不同的Jar文件里面，通过一些配置和额外的操作，可以让虚拟机有选择性的加载Jar文件。</p>
+<p>但是在Android系统中，一个应用是只允许有一个Dex文件的。也就是说在编译期的时候，所有的Jar文件最终会被合并成一个Dex文件。我们没有办法在Apk文件里面打包两个Dex，让DexOpt分别对两个Dex文件做处理，而Android系统也不会同时为一个Apk加载两个Dex。</p>
+<p><b>如果我们把Dex分成多个文件，然后在程序运行的时候，再把多的那几个动态的加载进来是否可行呢？</b></p>
+<p>也就是说我们能否在运行时阶段把代码加入虚拟机中。对于虚拟机来说，其实所有的代码都是在运行时被加载进来的。而不同于C语言还存在着静态链接。虚拟机在所有Java代码执行之前被启动，然后开始把字节码加载到环境中执行，我们可以理解成所有的代码都是动态加载到虚拟机里的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/06/2014-03-06-dexdongtai/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-21T00:00:00.000Z"><a href="/2014/02/21/2014-02-21-listviewpos/">Feb 21 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/21/2014-02-21-listviewpos/">ListView滑动位置精准记忆</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>需求场景：<br>一个ListView页面，滑动阅读到某一位置，然后退出页面，下次再进入页面的时候，想要直接滑动到上次阅读的位置。</p>
+<p>方案1：<br>页面退出的时候，ListView.getFirstVisiblePosition()来获取当前可见的第一个Item的position并记录，下次再进入页面的时候通过ListView.setSelection(int position)把ListView直接滑动到记忆的position。</p>
+<p>此方案记忆的ListView的位置不够精准，因为position指定的是ListView的Item的index，setSelection(int pos)只能把index为pos的item作为第一个可见的item来显示，所以item总是顶头显示的，不会显示滑出屏幕一半的item，所以ListView的位置只能定位到某个item的开始位置，并不精准。</p>
+<p>方案1的升级：<br>在方案1的基础上，再记录FirstVisiblePosition item的top/bottom等位置参数，然后恢复的时候ListView再scrollTo一下。</p>
+<p>此方案仍然不行，ListView的scrollTo没效果。</p>
+<p>终极方案：<br>退出页面的时候：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">Parcelable listState </span>=<span class="string"> listView.onSaveInstanceState();</span>
+</pre></td></tr></table></figure><br>记住listState对象；<br>再次进入页面的时候：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>listView<span class="preprocessor">.onRestoreInstanceState</span>(listState)<span class="comment">;</span>
+</pre></td></tr></table></figure>
+
+<p>记忆的位置分毫不差。</p>
+<p>要注意：listView的状态记忆后，还要保证其数据在两次进入页面时的一致性；<br>另：ListView的header会影响其状态对象，不过这个是小问题。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-18T00:00:00.000Z"><a href="/2014/01/18/2014-01-18-gpshelp/">Jan 18 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/01/18/2014-01-18-gpshelp/">2 GPS utility methods</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Methond 1 is to check whether the GPS is on:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isGPSIsOn</span>() {
+	LocationManager locationManager = (LocationManager) mContext
+			.getSystemService(Context.LOCATION_SERVICE);
+	<span class="keyword">return</span> locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+}
+</pre></td></tr></table></figure>
+
+<p>Method 2 is to open GPS setting page in Android device:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">openGPSSettingPage</span>() {
+	Intent intent = <span class="keyword">new</span> Intent();
+	intent.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	<span class="keyword">try</span> {
+		context.startActivity(intent);
+	} <span class="keyword">catch</span> (ActivityNotFoundException ex) {
+	}
+}
+</pre></td></tr></table></figure>
+
+ 
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/01/18/2014-01-18-gpshelp/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-14T00:00:00.000Z"><a href="/2014/01/14/2014-01-14-ping/">Jan 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/01/14/2014-01-14-ping/">PingUtil in Android</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Ping a host in Android:<br> “ping -c 1 127.0.0.1”<br> -c 1: The ping times.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre><span class="keyword">boolean</span> flag = <span class="keyword">false</span>;
+Runtime run = Runtime.getRuntime();
+Process proc = <span class="keyword">null</span>;
+<span class="keyword">try</span> {
+	proc = run.exec(<span class="string">"ping -c 1 127.0.0.1"</span>);
+	<span class="keyword">int</span> result = proc.waitFor();
+	<span class="keyword">if</span> (result == <span class="number">0</span>) {
+		flag = <span class="keyword">true</span>;
+	} <span class="keyword">else</span> {
+		flag = <span class="keyword">false</span>;
+	}
+} <span class="keyword">catch</span> (IOException e) {
+	e.printStackTrace();
+} <span class="keyword">catch</span> (InterruptedException e) {
+	e.printStackTrace();
+} <span class="keyword">finally</span> {
+	proc.destroy();
+}
+</pre></td></tr></table></figure>
+
+<p>Ping codes is simple, but:<br>1, you must run it in background thread since Process.waitfor() will blocks current thread.<br>2, And you should control the the execution time for Process.waitfor().</p>
+<p>The solutions of above 2 issues could be:<br>1, AsyncTask to run Process.waitfor() in background;<br>2, Handler.sendEmptyMessageDelayed() to send a delayed message which cancel the AsyncTask if the background codes running too long time.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/01/14/2014-01-14-ping/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-23T00:00:00.000Z"><a href="/2013/12/23/2013-12-23-draganddrop/">Dec 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/23/2013-12-23-draganddrop/">Android客户端的图形化拖放操作的设计实现</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><b>为什么要拖放？</b><br>拖放在某些UI交互中可以简化用户操作。</p>
+<p><b>拖放的步骤包括哪些？</b><br>“Drag and Drop”，拖放，顾名思义，总共就分三步：<br>1，    开始拖起来；<br>2，    正在拖；<br>3，    放下，进行操作；<br>在这三步里，贯穿的是数据的传输，从拖的地方传输到放的地方。</p>
+<p>现在，我们就以一个简单的拖放删除笔记的App来讲解上面三个步骤都怎么实现的。<br>App见截图，拽住上面的笔记，然后拖至底下的垃圾桶然后放开，笔记就被删除了。</p>
+<p><img src="http://a.hiphotos.bdimg.com/album/s%3D550%3Bq%3D90%3Bc%3Dxiangce%2C100%2C100/sign=4b2bee88b54543a9f11bfac92e2cfbbf/eac4b74543a9822637ce1b5b8882b9014a90ebbb.jpg?referer=83c60f9d60d9f2d3790611df5559&x=.jpg"/></p>
+<p><b>1，开始拖拽：</b><br>开始拖拽要解决三个问题：<br>1， 什么时候开始？如何开始？<br>一般是在用户长按一个组件的时候，我们开始拖拽，所以给要被拖拽的View定义它的OnLongClickListener，在其中调用View.startDrag()方法就可以了。<br>startDrag()方法的定义：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>boolean android<span class="preprocessor">.view</span><span class="preprocessor">.View</span><span class="preprocessor">.startDrag</span>(
+		ClipData data, DragShadowBuilder shadowBuilder, Object myLocalState, int flags)
+</pre></td></tr></table></figure>
+
+<p>第一个参数ClipData data是拖拽的对象，下面第2条来讲解；第二个参数DragShadowBuilder shadowBuilder是拖拽时的样子，下面的第3条来讲解。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/12/23/2013-12-23-draganddrop/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-15T00:00:00.000Z"><a href="/2013/12/15/2013-12-15-lednoti/">Dec 15 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/15/2013-12-15-lednoti/">LED notification in Android device</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Code can control the LED notification in Android device, using android.app.Notification:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>notification = new Notification()<span class="comment">;  </span>
+notification<span class="preprocessor">.flags</span> = Notification<span class="preprocessor">.FLAG</span>_SHOW_LIGHTS<span class="comment">;  </span>
+  
+notification<span class="preprocessor">.ledARGB</span> = ledColor<span class="comment">;  </span>
+notification<span class="preprocessor">.ledOffMS</span> = <span class="number">200</span><span class="comment">;  </span>
+notification<span class="preprocessor">.ledOnMS</span> = <span class="number">500</span><span class="comment">;  </span>
+  
+notificationManager<span class="preprocessor">.notify</span>(<span class="number">0</span>, notification)<span class="comment">;  </span>
+</pre></td></tr></table></figure>
+
+<p>ledARGB: The color of the led. The hardware will do its best approximation.</p>
+<p>ledOffMS: The number of milliseconds for the LED to be off while it’s flashing. The hardware will do its best approximation.</p>
+<p>ledOnMS: The number of milliseconds for the LED to be on while it’s flashing. The hardware will do its best approximation.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/12/15/2013-12-15-lednoti/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-10T00:00:00.000Z"><a href="/2013/12/10/2013-12-10-tiletextureimage/">Dec 10 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/10/2013-12-10-tiletextureimage/">How to tile small texture image onto page as its background</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>You don’t need to set a big size image as the background of pages if the image is texture or uniform color.</p>
+<p>How to tile small texture image onto big page/area as its background?</p>
+<p>First, define drawable xml in res/drawable,</p>
+<p>bg_texture_image.xml:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="pi">&lt;?xml version=”1.0″ encoding=”utf-8″?&gt;</span>  
+<span class="tag">&lt;<span class="title">bitmap</span> <span class="attribute">xmlns:android</span>=<span class="value">”http:</span>//<span class="attribute">schemas.android.com</span>/<span class="attribute">apk</span>/<span class="attribute">res</span>/<span class="attribute">android</span>”  
+      <span class="attribute">android:src</span>=<span class="value">”@drawable</span>/<span class="attribute">bg_image</span>”  
+      <span class="attribute">android:tileMode</span>=<span class="value">”repeat”</span> /&gt;</span>  
+</pre></td></tr></table></figure>
+
+<p>Second, use it as the background,</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="attribute">android:background</span>=<span class="string">”@drawable/bg_texture_image”  </span>
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-25T00:00:00.000Z"><a href="/2013/11/25/2013-11-25-TextViewwithanim/">Nov 25 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/11/25/2013-11-25-TextViewwithanim/">Implement a TextView with an animation in its left side</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>In my case, I want to write a TextView with an animation in its left side.</p>
+<p>ImageView + TextView could work but it’s not frugal enough.</p>
+<p>TextView with drawableLeft would be the best option.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">TextView</span>  
+     … …  
+     <span class="attribute">android:drawablePadding</span>=<span class="value">”10dip”</span>  
+     <span class="attribute">android:drawableLeft</span>=<span class="value">”@drawable</span>/<span class="attribute">loadingicon</span>” /&gt;</span>  
+</pre></td></tr></table></figure>
+
+<p>But above implementation just show a icon in the left of TextView, not an animation.</p>
+<p>How to show an animation instead of a icon?</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/11/25/2013-11-25-TextViewwithanim/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-20T00:00:00.000Z"><a href="/2013/11/20/2013-11-20-The Adapter of ListView/">Nov 20 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/11/20/2013-11-20-The Adapter of ListView/">The Adapter of ListView: Just adapt data to view, don’t do anything else</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>The design of SimpleAdapter is not good in my opinion.</p>
+<p>An adapter should just adapter the data to view, not care to inflate xml to create Layout View, hold the member Views of the layout view, and, fill the datas to each member View one by one. SimpleAdapter does these things all together. It is high coupling design.</p>
+<p>The solution is a ItemViewHolder class, which inflate and hold the layout view and its member views, and parse datas to fill them  to member views one by one. And the most cool is, it’s layout view of ItemViewHolder set “this” as its tag. So that you can get the ItemViewHolder instance of the convertView in getView(…, View convertView, …) function.</p>
+<p>See below code snippets.</p>
+<p>In Adapter, passed in a List as data list.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="built_in">List</span><span class="subst">&lt;</span><span class="built_in">Data</span><span class="subst">&gt;</span> dataList;  
+</pre></td></tr></table></figure>
+
+<p>and override getView() like this:</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/11/20/2013-11-20-The Adapter of ListView/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-16T00:00:00.000Z"><a href="/2013/11/16/2013-11-16-shape plus selector/">Nov 16 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/11/16/2013-11-16-shape plus selector/">Shape + Selector: Make a Shape as one item of the Selector</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Generally, I use a selector to select pictures or colors to render the normal and the pressed background for View. </p>
+<p>And use a Shape to draw a fixed background with border, round, gradient and other UI effect for View.</p>
+<p>What if you wanna use them both for one View?</p>
+<p>Make a Shape as one item of the Selector.</p>
+<p>Selector selects background from Shape list.</p>
+<p>Below is a sample.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/11/16/2013-11-16-shape plus selector/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-18T00:00:00.000Z"><a href="/2013/10/18/2013-10-18-units issue/">Oct 18 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/18/2013-10-18-units issue/">Units Problem: How to read text size as custom attr from xml and set it to TextView in java code</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Here is this topic’s background:</p>
+<p>I defined a custom View which extends FrameLayout and contains a TextView, calledMyView here. And I defined custom attribute “myviewtextsize” in attrs.xml for MyView so that clients can set different text size in layout xml for the TextView of MyView.</p>
+<p>So far, clients code can set text size like this:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">MyView</span>  
+     <span class="attribute">android:</span>…  
+     …
+     <span class="attribute">my:myviewtextsize</span>=<span class="value">”@dimen</span>/<span class="attribute">textsize_24</span>″  
+     …  
+/&gt;</span> 
+</pre></td></tr></table></figure>
+
+<p>The problem is: how to read the client’s text size number and set it to the TextVew of MyView?</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/10/18/2013-10-18-units issue/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2012-12-10T00:00:00.000Z"><a href="/2012/12/10/2012-12-10-startandroid/">Dec 10 2012</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2012/12/10/2012-12-10-startandroid/">Android初学笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Eclipse 【ADT】 源</p>
+<p><a href="https://dl-ssl.google.com/android/eclipse" target="_blank">https://dl-ssl.google.com/android/eclipse</a></p>
+<hr>
+<p>Notice that no matter what scenario causes the activity to stop, the system always calls onPause() before calling onStop().</p>
+<p>Although the onPause() method is called before onStop(), you should use onStop() to perform larger, more CPU intensive shut-down operations, such as writing information to a database.</p>
+<p>the system calls onStart() both when it creates your activity and when it restarts the activity from the stopped state.</p>
+<p>Resumed</p>
+<p>In this state, the activity is in the foreground and the user can interact with it. (Also sometimes referred to as the “running” state.)</p>
+<p>Paused</p>
+<p>In this state, the activity is partially obscured by another activity—the other activity that’s in the foreground is semi-transparent or doesn’t cover the entire screen. The paused activity does not receive user input and cannot execute any code. </p>
+<p>Stopped</p>
+<p>In this state, the activity is completely hidden and not visible to the user; it is considered to be in the background. While stopped, the activity instance and all its state information such as member variables is retained, but it cannot execute any code.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2012/12/10/2012-12-10-startandroid/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-11-09T00:00:00.000Z"><a href="/2011/11/09/2011-11-09-zhujie/">Nov 9 2011</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/09/2011-11-09-zhujie/">注解Demo</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>定义描述类名或者方法名的注解：ClassOrMethodFullName.java</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>@Target({ElementType.TYPE, ElementType.METHOD})
+
+@Retention(RetentionPolicy.RUNTIME)
+
+<span class="keyword">public</span> @<span class="keyword">interface</span> ClassOrMethodFullName {
+
+        String <span class="keyword">value</span>() <span class="keyword">default</span> <span class="string">"Unknown"</span>;
+
+        String fullName() <span class="keyword">default</span> <span class="string">"Unknown"</span>;
+}
+</pre></td></tr></table></figure>
+
+<p>定义描述方法参数个数的注解：MethodParameterCount.java</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/11/09/2011-11-09-zhujie/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-08-30T00:00:00.000Z"><a href="/2011/08/30/2011-08-30-js/">Aug 30 2011</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/08/30/2011-08-30-js/">js笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>定义描述类名或者方法名的注解：ClassOrMethodFullName.java</p>
+<p>【写一个js方法】</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">alertdemo</span><span class="params">()</span> {</span>
+    <span class="comment">//</span>
+};  
+</pre></td></tr></table></figure>
+
+<p>function + 方法名 + 括号 + 代码块</p>
+<p>【调用这个js方法得加括号】</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">button</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">onclick</span>=<span class="value">"alertdemo()"</span>&gt;</span>点击这里<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>【带参数的函数，参数是不需要声明类型部分的】</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">alertmsg</span><span class="params">(msg)</span> {</span>
+
+alert(msg);
+
+}
+</pre></td></tr></table></figure>
+
+<p>【带返回值的函数，很好理解】</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">getAResult</span><span class="params">()</span> {</span>
+
+<span class="keyword">return</span> <span class="string">"返回的结果"</span>;
+
+}
+</pre></td></tr></table></figure>
+
+<p>返回值是可选的，means，你想在哪个分支返回就返回，在另一个分支不返回就不返回，返回啥都没人管，因为function根本不会申明返回类型，真是随便的语言啊。</p>
+<p>【修改html元素内容】</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>x=document.getElementById(<span class="string">"demo"</span>) <span class="comment">//查找元素</span>
+
+x.innerHTML=<span class="string">"Hello JavaScript"</span>; <span class="comment">//改变内容</span>
+
+x.style.<span class="keyword">color</span>=<span class="string">"#ff0000"</span>;    <span class="comment">//改变样式</span>
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/08/30/2011-08-30-js/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-06-22T00:00:00.000Z"><a href="/2011/06/22/2011-06-22-design/">Jun 22 2011</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/06/22/2011-06-22-design/">设计模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><b>单例模式的并发问题和延迟加载</b></p>
+<p>非并发的单例模式：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="keyword">class</span> Singleton {  
+
+    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>; 
+
+    <span class="keyword">private</span> <span class="title">Singleton</span>() { 
+
+    } 
+
+    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() { 
+
+        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) {     
+
+              instance = <span class="keyword">new</span> Singleton(); 
+
+        } 
+
+        <span class="keyword">return</span> instance; 
+
+    } 
+} 
+</pre></td></tr></table></figure>
+
+<p>多线程下，上面的instance == null 与 instance = new Singleton()的操作不是原子的，所以会导致instance == null的判断不正确，从而导致出现多个实例；</p>
+<p>synchronized能保证上述的原子性：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="keyword">class</span> Singleton {  
+
+    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>; 
+
+    <span class="keyword">private</span> <span class="title">Singleton</span> () { 
+
+    } 
+
+    <span class="keyword">public</span> <span class="keyword">static</span> synchronized Singleton <span class="title">getInstance</span>() { 
+
+        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) { 
+
+                 instance = <span class="keyword">new</span> SynchronizedSingleton(); 
+
+        } 
+
+       <span class="keyword">return</span> instance; 
+
+     } 
+} 
+</pre></td></tr></table></figure>
+
+<p>synchronized解决了原子性问题，但是，当第一次Singleton实例构造之后，这个instance对所有线程都可见了，所有线程都能正确判断instance == null为false了，此时再synchronized就没必要了，造成性能开销；</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/06/22/2011-06-22-design/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-03-01T00:00:00.000Z"><a href="/2011/03/01/2011-03-01-multithread/">Mar 1 2011</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/03/01/2011-03-01-multithread/">并发和多线程</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><b>某个线程获得对象的锁之后，只能阻止其他线程获得同一个锁，并不能阻止其他线程通过另外的锁来访问对象的变量</b></p>
+<p>每个可变或共享的变量都该由同一个锁来保护；</p>
+<p>简单粗暴的全部synchronized会使得并发程序变成串行程序，影响性能，多核CPU会有空载运行，应该缩小同步块的大小，将不影响共享状态并且执行时间较长的操作从同步代码块中分离出去。</p>
+<p>简单性（对整个方法同步）与并发性（对尽可能短的代码路径进行同步）之间的平衡；</p>
+<p>当执行较长时间或无法快速完成的操作时，比如网络I/O，一定不要持有锁，不然会影响活跃性和性能。</p>
+<hr>
+<p><b>并发关注的就是：共享+可变的状态</b></p>
+<p>多个线程之间，不仅要防止错误地修改和读取了状态，还要共享状态，即一个线程修改了状态，另一个线程要被通知到这个修改；</p>
+<p>重排序：无同步的多线程程序中，无法正确判断代码的执行顺序。</p>
+<p>Sleep和Yield都是让cpu不让锁，跟锁没关系；Wait是让锁。</p>
+<p>非volatile的long和double不是线程安全的，64位的读写会被分解，不是原子性的；</p>
+<p>“加锁的含义不仅仅局限于互斥行为，还包括内存可见性。为了确保所有线程都能看到共享变量的最新值，所有执行读写操作的线程都必须在同一锁上同步。”</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/03/01/2011-03-01-multithread/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2010-03-06T00:00:00.000Z"><a href="/2010/03/06/2010-03-06-fx/">Mar 6 2010</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2010/03/06/2010-03-06-fx/">泛型：有限通配符的用法</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>发送一个子类对象给声明了其父类类型的方法，是没问题的；</p>
+<p>但是发送一个子类对象List给声明了其父类类型List的方法，是不行的；</p>
+<p>这个时候，有限通配符就可以派上用场，在接受方法的声明中：List&lt;? extends E&gt; o;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre>{      
+  <span class="built_in">Stack</span><span class="subst">&lt;</span>One<span class="subst">&gt;</span> <span class="built_in">stack</span> <span class="subst">=</span> <span class="literal">new</span> <span class="built_in">Stack</span><span class="subst">&lt;</span>One<span class="subst">&gt;</span>();
+
+  <span class="built_in">stack</span><span class="built_in">.</span>pushSingle(<span class="literal">new</span> One());
+
+  <span class="built_in">stack</span><span class="built_in">.</span>pushSingle(<span class="literal">new</span> Two());
+
+  <span class="built_in">List</span><span class="subst">&lt;</span>One<span class="subst">&gt;</span> arrayList <span class="subst">=</span> <span class="literal">new</span> ArrayList<span class="subst">&lt;</span>One<span class="subst">&gt;</span>();
+
+  <span class="built_in">stack</span><span class="built_in">.</span>push(arrayList);
+
+  <span class="comment">//有限通配符的用法</span>
+
+  <span class="built_in">List</span><span class="subst">&lt;</span>Two<span class="subst">&gt;</span> <span class="built_in">list</span> <span class="subst">=</span> <span class="literal">new</span> ArrayList<span class="subst">&lt;</span>Two<span class="subst">&gt;</span>();
+
+  <span class="built_in">stack</span><span class="built_in">.</span>push(<span class="built_in">list</span>); <span class="comment">//The method push(List&lt;One&gt;) in the type Stack&lt;One&gt; is not applicable for the arguments (List&lt;Two&gt;)</span>
+
+  <span class="built_in">stack</span><span class="built_in">.</span>push2(<span class="built_in">list</span>);
+}
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2010/03/06/2010-03-06-fx/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2010-02-10T00:00:00.000Z"><a href="/2010/02/10/2010-02-10-class/">Feb 10 2010</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2010/02/10/2010-02-10-class/">Java与Class</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><b>类与类加载器</b></p>
+<p>类加载器阶段的“通过一个类的全限定名来获取描述此类的二进制字节流”这个动作被放到了Java虚拟机外部去实现，以便让应用程序自己定义如何获取所需要的类，即，可在自己的代码中实现一个java.lang.ClassLoader类作为自定义的类加载器；</p>
+<p>不同的类加载器加载上来的类并不相等，即使是来源于同一个二进制字节流的class定义；换言之，比较两个类是否相等，只有在这两个类是同一个类加载器的前提下才有意义；</p>
+<p>如果不自定义类加载器，则会有系统应用程序类加载器来加载类，除了虚拟机中的“启动类加载器”之外，其他独立于虚拟机之外的类加载器都继承自java.lang.ClassLoader；</p>
+<p>启动类加载器：负责<JAVA_HOME>\lib中的类加载，如rt.jar；</p>
+<p>扩展类加载器：负责<JAVA_HOME>\lib\ext中的类加载，或者被java.ext.dirs指定的路径中的类加载，开发者可以直接使用这个加载器；sun.misc.Launcher$ExtClassLoader来实现；</p>
+<p>应用程序类加载器：java.lang.ClassLoader.getSystemClassLoader()返回的就是这个加载器，这也是程序中的默认类加载器，sun.misc.Launcher$AppClassLoader来实现；</p>
+<p>双亲委派模型的意思是，除了顶层的启动类加载器外，其余的类加载器都要有自己的父类加载器，这种继承关系用组合来实现，如果一个类加载器收到了类加载请求，先把这个请求委派给父类加载器去完成，最终一层层把请求传送给了顶层的启动类加载器中，当父类加载器无法加载时再自己加载；</p>
+<p>这样就可以保证，基础类，比如java.lang.Object在程序中都被交给了启动类加载器从rt.jar中加载的同一个类；</p>
+<p>越基础的类由越上层的加载器进行加载；</p>
+<p>天下所有的类都继承于java.lang.Object类，不错，但是，如果不保证用同一个加载器的话，将是不同的java.lang.Object；</p>
+<p>所以说，也可以自己定义一个类叫java.lang.Object；</p>
+<p>注意，上面必须是java.lang.Object，而不是Object，因为即使是同一个加载器下，也可以定义一个非java.lang包下的Object类；</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2010/02/10/2010-02-10-class/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+    <a href="/archives/page/2/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:mosthink.net">
+  </form>
+</div>
+
+  
+
+  <div class="widget tag">
+  <h3 class="title">My Projects</h3>
+  <ul class="entry">
+ 	<li><a href="http://mosthink.net/LockPattern" target="_blank">LockPattern</a></li>
+    <li><a href="http://mosthink.net/ANotepad" target="_blank">ANotepad</a></li>
+    <li><a href="http://mosthink.net/PushNewsmth2Mail" target="_blank">PushNewsmth2Mail</a></li>
+    <li><a href="http://mosthink.net/DoubleFacedCamera" target="_blank">DoubleFacedCamera</a></li>
+    <li><a href="http://mosthink.net/TransformersPuzzle" target="_blank">TransformersPuzzle</a></li>
+    <li><a href="http://mosthink.net/BluetoothChat" target="_blank">BluetoothChat</a></li>
+    <li><a href="http://mosthink.net/LianLianKan" target="_blank">LianLianKan</a></li>
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">My Codes(gist)</h3>
+  <ul class="entry">
+    <li><a href="https://gist.github.com/Viyu/8093281" target="_blank">DragAndDropDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/8093389" target="_blank">LedLightDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/d0df67fb40be217638a3" target="_blank">PingUtil</a></li>
+    <li><a href="https://gist.github.com/Viyu/9406327" target="_blank">GPS utility</a></li>
+    <li><a href="https://gist.github.com/Viyu/9521561" target="_blank">PopupWindow</a></li>
+  </ul> 
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    <li><a href="http://haoffer.com" target="_blank">Haoffer.com</a></li>
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>2</small></li>
+  
+    <li><a href="/tags/Android/">Android</a><small>8</small></li>
+  
+    <li><a href="/tags/Android Dex/">Android Dex</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ListView/">Android ListView</a><small>1</small></li>
+  
+    <li><a href="/tags/Android LockPattern/">Android LockPattern</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ping/">Android ping</a><small>1</small></li>
+  
+    <li><a href="/tags/Annotation/">Annotation</a><small>1</small></li>
+  
+    <li><a href="/tags/Class/">Class</a><small>1</small></li>
+  
+    <li><a href="/tags/Concurrence/">Concurrence</a><small>1</small></li>
+  
+    <li><a href="/tags/Design/">Design</a><small>1</small></li>
+  
+    <li><a href="/tags/GPS/">GPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>3</small></li>
+  
+    <li><a href="/tags/Jvm/">Jvm</a><small>1</small></li>
+  
+    <li><a href="/tags/PopupWindow/">PopupWindow</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Viyu
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

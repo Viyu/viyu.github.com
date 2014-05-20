@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>GPS | Mosthink</title>
+  <meta name="author" content="Viyu">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Mosthink"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Mosthink" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Mosthink</a></h1>
+  <h2><a href="/">Viyu&#39;s Blog</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">GPS</h2>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-18T00:00:00.000Z"><a href="/2014/01/18/2014-01-18-gpshelp/">Jan 18 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/01/18/2014-01-18-gpshelp/">2 GPS utility methods</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Methond 1 is to check whether the GPS is on:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isGPSIsOn</span>() {
+	LocationManager locationManager = (LocationManager) mContext
+			.getSystemService(Context.LOCATION_SERVICE);
+	<span class="keyword">return</span> locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+}
+</pre></td></tr></table></figure>
+
+<p>Method 2 is to open GPS setting page in Android device:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">openGPSSettingPage</span>() {
+	Intent intent = <span class="keyword">new</span> Intent();
+	intent.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	<span class="keyword">try</span> {
+		context.startActivity(intent);
+	} <span class="keyword">catch</span> (ActivityNotFoundException ex) {
+	}
+}
+</pre></td></tr></table></figure>
+
+ 
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/01/18/2014-01-18-gpshelp/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:mosthink.net">
+  </form>
+</div>
+
+  
+
+  <div class="widget tag">
+  <h3 class="title">My Projects</h3>
+  <ul class="entry">
+ 	<li><a href="http://mosthink.net/LockPattern" target="_blank">LockPattern</a></li>
+    <li><a href="http://mosthink.net/ANotepad" target="_blank">ANotepad</a></li>
+    <li><a href="http://mosthink.net/PushNewsmth2Mail" target="_blank">PushNewsmth2Mail</a></li>
+    <li><a href="http://mosthink.net/DoubleFacedCamera" target="_blank">DoubleFacedCamera</a></li>
+    <li><a href="http://mosthink.net/TransformersPuzzle" target="_blank">TransformersPuzzle</a></li>
+    <li><a href="http://mosthink.net/BluetoothChat" target="_blank">BluetoothChat</a></li>
+    <li><a href="http://mosthink.net/LianLianKan" target="_blank">LianLianKan</a></li>
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">My Codes(gist)</h3>
+  <ul class="entry">
+    <li><a href="https://gist.github.com/Viyu/8093281" target="_blank">DragAndDropDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/8093389" target="_blank">LedLightDemo</a></li>
+    <li><a href="https://gist.github.com/Viyu/d0df67fb40be217638a3" target="_blank">PingUtil</a></li>
+    <li><a href="https://gist.github.com/Viyu/9406327" target="_blank">GPS utility</a></li>
+    <li><a href="https://gist.github.com/Viyu/9521561" target="_blank">PopupWindow</a></li>
+  </ul> 
+</div>
+
+
+  <div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    <li><a href="http://haoffer.com" target="_blank">Haoffer.com</a></li>
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>2</small></li>
+  
+    <li><a href="/tags/Android/">Android</a><small>8</small></li>
+  
+    <li><a href="/tags/Android Dex/">Android Dex</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ListView/">Android ListView</a><small>1</small></li>
+  
+    <li><a href="/tags/Android LockPattern/">Android LockPattern</a><small>1</small></li>
+  
+    <li><a href="/tags/Android ping/">Android ping</a><small>1</small></li>
+  
+    <li><a href="/tags/Annotation/">Annotation</a><small>1</small></li>
+  
+    <li><a href="/tags/Class/">Class</a><small>1</small></li>
+  
+    <li><a href="/tags/Concurrence/">Concurrence</a><small>1</small></li>
+  
+    <li><a href="/tags/Design/">Design</a><small>1</small></li>
+  
+    <li><a href="/tags/GPS/">GPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>3</small></li>
+  
+    <li><a href="/tags/Jvm/">Jvm</a><small>1</small></li>
+  
+    <li><a href="/tags/PopupWindow/">PopupWindow</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Viyu
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
